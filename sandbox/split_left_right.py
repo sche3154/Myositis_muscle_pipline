@@ -1,18 +1,14 @@
 import subprocess
+import argparse
 from utils.data_io import *
 
-def crop_middle(roi_fln):
-    try:      
-        roi_img = nib.load(roi_fln + '.nii.gz')
-    except FileNotFoundError:
-        print('INFO: Cannot find the .nii.gz file, loading .nii instead')
-        roi_img = nib.load(roi_fln + '.nii')
+def split_middle(file_path):     
+    ### Load the data ###
+    roi_data, affine = load_data(file_path, needs_affine=True)
+    name = file_path.split('.')[0]
 
-    roi_dat = roi_img.get_fdata()
-    roi_aff = roi_img.affine
-    roi_hdr = roi_img.header
-
-    projection_z = np.mean(roi_dat,axis=2)
+    ### Find the middle point ###
+    projection_z = np.mean(roi_data,axis=2)
     projection_z = np.rot90(projection_z)
 
     projection_zx = np.mean(projection_z, axis=0)
@@ -21,17 +17,19 @@ def crop_middle(roi_fln):
     middle_point = np.argmin(projection_zx[left_max:right_max])
     middle_point += left_max
 
-    
-    print('########           Cropping ' + roi_fln + ' left         ########')
-    crop_command = ["fslroi", roi_fln, roi_fln + "_left.nii.gz", str(middle_point), str(roi_dat.shape[0]-middle_point), '0', str(roi_dat.shape[1]), '0', str(roi_dat.shape[2])]
+    ### Split the left and right based on the middle point
+    print('########           Cropping ' + name + ' left         ########')
+    crop_command = ["fslroi", file_path, name + "_left.nii.gz", str(middle_point), str(roi_data.shape[0]-middle_point), '0', str(roi_data.shape[1]), '0', str(roi_data.shape[2])]
     print(crop_command)
     subprocess.call(crop_command)
-    print('########          Cropping ' + roi_fln + ' right         ########')
-    crop_command = ["fslroi", roi_fln, roi_fln + "_right.nii.gz", '0', str(middle_point), '0', str(roi_dat.shape[1]), '0', str(roi_dat.shape[2])]
+    print('########          Cropping ' + file_path + ' right         ########')
+    crop_command = ["fslroi", file_path, name + "_right.nii.gz", '0', str(middle_point), '0', str(roi_data.shape[1]), '0', str(roi_data.shape[2])]
     subprocess.call(crop_command)
     print(crop_command)
     return 1
 
+parser = argparse.ArgumentParser(description='Arguments for splitting left and right legs')
+parser.add_argument('-f', type= str, required= True, help='The input file path')
+args = parser.parse_args()
 
-data_path = os.path.join('/home/sheng/RA/data/pilot_data', '_--_SNAC_Thigh_20240313115104_2')
-crop_middle(data_path)
+split_middle(args.f)
