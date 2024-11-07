@@ -2,7 +2,7 @@ import subprocess
 import argparse
 from utils.data_io import *
 
-def split_middle(file_path):     
+def split_middle(file_path,):     
     ### Load the data ###
     roi_data, affine = load_data(file_path, needs_affine=True)
     name = file_path.split('.')[0]
