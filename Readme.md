@@ -2,16 +2,52 @@
 
 Before procedding, make sure you have the following tools, including FSL, Mrtirx3, itksnap, python3 and python packages listed in the requirement.txt
 
+We will take data in the 'muscle_longitudinal' as example to run the following pipeline. 
+
+```
+muscle_longitudinal
+│   
+└───BL
+│   │ 
+│   |____raw
+│       |        
+│       |___Ax_T1
+│           |  IM-0001-0001.dcm
+│           |  IM-0001-0002.dcm
+│           |  ...
+└───FU
+    │
+    │___raw
+        |
+        |___Ax_3D_T1_3
+            |  IM-0001-0001.dcm
+            |  IM-0001-0002.dcm
+            |  ...
+```
+
+From the above, you can observe there are two main folders called 'BL' and 'FU', which indicates baseline data and followup data, respectively. For each of them,
+\there is a 'raw' folder inside, which contains the corresponding 'Ax_T1' (folder of unprocessed T1-weighted data). In 'Ax_T1', all files are ended in .dcm. 
+\We now start the muscle pipeline.
+
 ## 1. convert dicom to nii
 
 After getting the raw data, which usually ends in .dcm, you need to convert it into .nii.gz to make convenience for afterwards operations.
+An example is provided in [mrtrix3](https://mrtrix.readthedocs.io/en/dev/tips_and_tricks/dicom_handling.html)
 
 ```
 mrconvert [input_dir_of_dcm_files] [output_path/converted.nii.gz]
-
 ```
 
-An example is provided in [mrtrix3](https://mrtrix.readthedocs.io/en/dev/tips_and_tricks/dicom_handling.html)
+For our example, please see the code below.
+```
+cd /home/sheng/RA/data/muscle_longitudinal
+mrconvert /home/sheng/RA/data/muscle_longitudinal/BL/raw/Ax_3D_T1_3  /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh.nii.gz
+mrconvert /home/sheng/RA/data/muscle_longitudinal/FU/raw/Ax_3D_T1_3  /home/sheng/RA/data/muscle_longitudinal/BL/raw/FU3_thigh.nii.gz
+```
+
+We have now converted the raw baseline and followup data into the corresponding bl_thigh.nii.gz and FU3_thigh.nii.gz, respectively.
+![bl_thigh.nii.gz](./imgs/step1/bl.png)
+![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
 
 ## 2. splitting left and right legs
 
