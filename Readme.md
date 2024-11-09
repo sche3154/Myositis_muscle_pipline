@@ -49,10 +49,8 @@ We have now converted the raw baseline and followup data into the corresponding 
 
 bl_thigh            |  FU3_thigh
 :-------------------------:|:-------------------------:
-!![bl_thigh.nii.gz](./imgs/step1/bl.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
+![bl_thigh.nii.gz](./imgs/step1/bl.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
 
-![bl_thigh.nii.gz](./imgs/step1/bl.png)
-![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
 
 ## 2. splitting left and right legs
 
@@ -77,6 +75,10 @@ We can use 'mrview' command to take a look of the splitted thigh.
 ```
 mrview
 ```
+
+bl_thigh_left/right            |  FU3_thigh_left/right
+:-------------------------:|:-------------------------:
+![bl_thigh.nii.gz](./imgs/step2/bl_splitted.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu_splitted.png)
 
 
 
