@@ -42,10 +42,15 @@ For our example, please see the code below.
 ```
 cd /home/sheng/RA/data/muscle_longitudinal
 mrconvert /home/sheng/RA/data/muscle_longitudinal/BL/raw/Ax_3D_T1_3  /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh.nii.gz
-mrconvert /home/sheng/RA/data/muscle_longitudinal/FU/raw/Ax_3D_T1_3  /home/sheng/RA/data/muscle_longitudinal/BL/raw/FU3_thigh.nii.gz
+mrconvert /home/sheng/RA/data/muscle_longitudinal/FU/raw/Ax_3D_T1_3  /home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh.nii.gz
 ```
 
 We have now converted the raw baseline and followup data into the corresponding bl_thigh.nii.gz and FU3_thigh.nii.gz, respectively.
+
+bl_thigh            |  FU3_thigh
+:-------------------------:|:-------------------------:
+!![bl_thigh.nii.gz](./imgs/step1/bl.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
+
 ![bl_thigh.nii.gz](./imgs/step1/bl.png)
 ![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
 
@@ -58,6 +63,22 @@ python3 split_middle.py -f [target_path/converted.nii.gz]
 ```
 
 The above command will generate two files at [target_path] with the name of converted_left.nii.gz and converted_right.nii.gz, respectively.
+
+For our example, please see the code below.
+```
+python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/split_middle.py -f /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh.nii.gz
+python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/split_middle.py -f /home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh.nii.gz
+```
+
+Now we have generated 4 files, including bl_thigh_left.nii.gz, bl_thigh_right.nii.gz, FU3_thigh_left.nii.gz, and FU3_thigh_right.nii.gz.
+
+We can use 'mrview' command to take a look of the splitted thigh.
+
+```
+mrview
+```
+
+
 
 ## 3. femur segmentation
 
