@@ -78,7 +78,7 @@ mrview
 
 bl_thigh_left/right            |  FU3_thigh_left/right
 :-------------------------:|:-------------------------:
-![bl_thigh.nii.gz](./imgs/step2/bl_splitted.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu_splitted.png)
+![bl_thigh.nii.gz](./imgs/step2/bl_splitted.png)  |  ![FU3_thigh.nii.gz](./imgs/step2/fu_splitted.png)
 
 
 
