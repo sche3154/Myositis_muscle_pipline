@@ -68,19 +68,18 @@ python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/split_middle.py -f /home/
 python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/split_middle.py -f /home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh.nii.gz
 ```
 
-Now we have generated 4 files, including bl_thigh_left.nii.gz, bl_thigh_right.nii.gz, FU3_thigh_left.nii.gz, and FU3_thigh_right.nii.gz.
-
-We can use 'mrview' command to take a look of the splitted thigh.
-
-```
-mrview
-```
-
 bl_thigh_left/right            |  FU3_thigh_left/right
 :-------------------------:|:-------------------------:
 ![bl_thigh.nii.gz](./imgs/step2/bl_splitted.png)  |  ![FU3_thigh.nii.gz](./imgs/step2/fu_splitted.png)
 
 
+Now we have generated 4 files, including bl_thigh_left.nii.gz, bl_thigh_right.nii.gz, FU3_thigh_left.nii.gz, and FU3_thigh_right.nii.gz.
+
+You can use 'mrview' command to take a look of the splitted thigh.
+
+```
+mrview
+```
 
 ## 3. femur segmentation
 
