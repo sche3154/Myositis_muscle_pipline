@@ -138,6 +138,57 @@ flirt -in /home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh_left.nii.gz \
 '-ref' is the reference image (It is still baseline femur).
 '-out' is the transformed out (Currently, it will be registered followup thigh, instead of femur !!!!)
 
-## 5. Crop ROI 
+After registration, you have successfully aligned the followup and baseline data. You can now do further analysis.
+
+## 5. crop ROIs
+We need to crop ROIs for both baseline and followup data. According to the [paper](https://link.springer.com/chapter/10.1007/978-3-030-00807-9_2), the ROI is located between the axial slice immediately superior to the patella and the inferior border of the gluteus maximus muscle.
+
+We will take baseline together with followup left thigh data as an example, you should apply the same process to the right thigh later.
+
+1. Open the itksnap 
+2. Load the baseline image
+3. Check the axial view to inspect the ROI
+4. Record the corresponding slice position of ROI in axial view.
+5. Run the following commands
+
+```
+python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/crop_roi.py \
+-f /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left.nii.gz \
+-b 65 \
+-t 275
+```
+
+```
+python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/crop_roi.py \
+-f /home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh_left_ref2bl.nii.gz \
+-b 65 \
+-t 275 
+```
+
+The first command will generate the roi of the baseline data: '/home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi.nii.gz'. The second command will generate the roi of the followup data: '/home/sheng/RA/data/muscle_longitudinal/FU/raw/FU3_thigh_left_ref2bl_roi.nii.gz'.
+
+Since we have registered the followup to baseline, the position of ROI will be the same. That's the reason we only need to inspect the baseline data.
+
+## 6. N4 Bias Correction
+
+We now need to apply the bias correction to baseline and followup data. This is to address the inhomogenity issue for better muscle mask generation in later steps. The adopted 'N4' tool is explained in the [offical documentation](https://github.com/ANTsX/ANTs/wiki/N4BiasFieldCorrection).
+
+We will take baseline left thigh roi as an example, you should apply the same process to other rois.
+
+```
+N4BiasFieldCorrection \
+-i /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi.nii.gz \
+-o /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4.nii.gz
+```
+
+In this command, '-i' is input, and '-o' is the output.
+
+## 7. Mask Generation
+
+
+
+
+
+
 
 

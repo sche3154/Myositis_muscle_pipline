@@ -15,8 +15,8 @@ data_path = os.path.join('/home/sheng/RA/data/pilot_data', '_--_SNAC_Thigh_20240
 
 parser = argparse.ArgumentParser(description='Arguments for croping roi')
 parser.add_argument('-f', type= str, required= True, help='The input file path')
-parser.add_argument('-b', '--bottom', type= int, default=0, help='z-axis slice to start')
-parser.add_argument('-t', '--top', type= int, default=200, help='z-axis slice to end')
+parser.add_argument('-b', type= int, default=0, help='z-axis slice to start')
+parser.add_argument('-t', type= int, default=200, help='z-axis slice to end')
 args = parser.parse_args()
 
-crop_roi(args.f, args.bottom, args.top)
+crop_roi(args.f, args.b, args.t)
