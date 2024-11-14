@@ -185,7 +185,21 @@ In this command, '-i' is input, and '-o' is the output.
 
 ## 7. Mask Generation
 
+You can now use the trained model to generate thigh muscle masks. I will take the baseline left thigh data as an example.
 
+```
+python3 predict_mask.py \
+-i /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4.nii.gz \
+-o /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4_mask.nii.gz
+```
+
+## 8. Mask Refine.
+
+This step is to refine the muscle mask by mannual inspection.
+
+1. Open itksnap.
+2. Load the predict mask.
+3. Check the axial view slice by slice and use the 'brush' tool to complete missing thigh mask.
 
 
 
