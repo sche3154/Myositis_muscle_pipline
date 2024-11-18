@@ -1,6 +1,8 @@
 import torch 
 from torch.nn import init
 
+device = torch.device('cuda:{}'.format(0))
+
 def init_weights(net, init_type='normal', init_gain=0.02):
     """Initialize network weights.
 
@@ -72,7 +74,7 @@ def load_networks(net, load_path=None):
     Parameters:
         epoch (int) -- current epoch; used in the file name '%s_net_%s.pth' % (epoch, name)
     """
-    device = torch.device('cuda:{}'.format(0))
+    
     if isinstance(net, torch.nn.DataParallel):
         net = net.module
         print('loading the model from %s' % load_path)

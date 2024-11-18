@@ -68,14 +68,14 @@ def patch_generation(image, kernel_size, stride, three_dim):
 
         return patches, coords
 
-def preprocessing(thigh_data):
+def preprocessing(thigh_data, intensity_thres=4000):
 
     kernel_size = (128,128,16)
     stride_size = (64,64,12)
 
-    thigh_data[thigh_data<=1000] = 0.
+    thigh_data[thigh_data<=intensity_thres] = 0.
     coarse_mask = np.zeros(thigh_data.shape)
-    coarse_mask[thigh_data>1000] = 1.
+    coarse_mask[thigh_data>intensity_thres] = 1.
 
     thigh_data_norm = instance_norm_2DSlices(thigh_data, coarse_mask)
 
@@ -91,4 +91,28 @@ def preprocessing(thigh_data):
     thigh_data_patches, thigh_coords = patch_generation(thigh_data_bounded
                                                         , kernel_size, stride_size, three_dim=True)
 
-    return thigh_data_patches, thigh_coords, bb 
+    return thigh_data_patches, thigh_coords, bb, bb_shape
+
+def postprocessing(outputs, thigh_coords, bb, bb_shape, thigh_shape, confidence_thres):
+        
+        kernel_size = (128,128,16)
+        stride_size = (64,64,12)
+        
+        print('Un-Patching')
+        resulted_img = concat_matrices(patches=outputs,
+                                            image_size = bb_shape,
+                                            window= kernel_size,
+                                            overlap= stride_size,
+                                            three_dim= True,
+                                            coords=thigh_coords)
+                
+        resulted_img[resulted_img > confidence_thres] = 1.
+        resulted_img[resulted_img <= confidence_thres] = 0.
+
+        print('Un-bounding')
+        tmp = np.zeros((thigh_shape))
+        bb = bb
+        tmp[bb[0]:bb[1], bb[2]:bb[3], bb[4]:bb[5]] = resulted_img
+        resulted_img = tmp
+
+        return resulted_img
