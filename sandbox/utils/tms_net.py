@@ -1,6 +1,7 @@
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
+from utils.net_operations import *
 
 class Conv3D(torch.nn.Module):
 
@@ -82,7 +83,6 @@ class U3DNet(nn.Module):
         
         # self.out = Conv3D(cnum, out_channels, 3, 1, padding=1, batch_norm=batch_norm, activation=activation)
                                  
-
     def forward(self, x, encoder_only=False):
         feat = []
 
@@ -126,5 +126,17 @@ class U3DNet(nn.Module):
         up_4 = self.dec4_2(concat_4)
  
         out = self.out(up_4)
+
+        return out
+    
+class TmsNet(nn.Module):
+
+    def __init__(self):
+        super(TmsNet, self).__init__()
+        self.net = U3DNet(1, 1)
+
+    def forward(self, x):
+        
+        out = self.net(x)
 
         return out

@@ -1,5 +1,5 @@
 import numpy as np
-from patch_operations import *
+from .patch_operations import *
 
 def instance_norm_2DSlices(image, mask=None):
         # (W,H,D)

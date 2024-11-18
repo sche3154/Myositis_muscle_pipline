@@ -188,7 +188,7 @@ In this command, '-i' is input, and '-o' is the output.
 You can now use the trained model to generate thigh muscle masks. I will take the baseline left thigh data as an example.
 
 ```
-python3 predict_mask.py \
+python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/predict_mask.py \
 -i /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4.nii.gz \
 -o /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4_mask.nii.gz
 ```

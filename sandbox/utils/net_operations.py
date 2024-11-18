@@ -53,33 +53,38 @@ def init_net(net, init_type='normal', init_gain=0.02, gpu_ids=[]):
     return net
 
 def __patch_instance_norm_state_dict(state_dict, module, keys, i=0):
-        """Fix InstanceNorm checkpoints incompatibility (prior to 0.4)"""
-        key = keys[i]
-        if i + 1 == len(keys):  # at the end, pointing to a parameter/buffer
-            if module.__class__.__name__.startswith('InstanceNorm') and \
-                    (key == 'running_mean' or key == 'running_var'):
-                if getattr(module, key) is None:
-                    state_dict.pop('.'.join(keys))
-            if module.__class__.__name__.startswith('InstanceNorm') and \
-               (key == 'num_batches_tracked'):
+    """Fix InstanceNorm checkpoints incompatibility (prior to 0.4)"""
+    key = keys[i]
+    if i + 1 == len(keys):  # at the end, pointing to a parameter/buffer
+        if module.__class__.__name__.startswith('InstanceNorm') and \
+                (key == 'running_mean' or key == 'running_var'):
+            if getattr(module, key) is None:
                 state_dict.pop('.'.join(keys))
-        else:
-            __patch_instance_norm_state_dict(state_dict, getattr(module, key), keys, i + 1)
+        if module.__class__.__name__.startswith('InstanceNorm') and \
+            (key == 'num_batches_tracked'):
+            state_dict.pop('.'.join(keys))
+    else:
+        __patch_instance_norm_state_dict(state_dict, getattr(module, key), keys, i + 1)
 
-device = torch.device('cuda:{}'.format(0))
+def load_networks(net, load_path=None):
+    """Load all the networks from the disk.
 
-def load_net(net, load_path): # load single net added by sheng
-        if isinstance(net, torch.nn.DataParallel):
-            net = net.module
-
+    Parameters:
+        epoch (int) -- current epoch; used in the file name '%s_net_%s.pth' % (epoch, name)
+    """
+    device = torch.device('cuda:{}'.format(0))
+    if isinstance(net, torch.nn.DataParallel):
+        net = net.module
         print('loading the model from %s' % load_path)
 
-        state_dict = torch.load(load_path, map_location=str(device))
+        # if you are using PyTorch newer than 0.4 (e.g., built from
+        # GitHub source), you can remove str() on self.device
+    state_dict = torch.load(load_path, map_location=str(device))
 
-        if hasattr(state_dict, '_metadata'):
-            del state_dict._metadata
+    if hasattr(state_dict, '_metadata'):
+        del state_dict._metadata
 
-        # patch InstanceNorm checkpoints prior to 0.4
-        for key in list(state_dict.keys()):  # need to copy keys here because we mutate in loop
-            __patch_instance_norm_state_dict(state_dict, net, key.split('.'))
+            # patch InstanceNorm checkpoints prior to 0.4
+    for key in list(state_dict.keys()):  # need to copy keys here because we mutate in loop
+        __patch_instance_norm_state_dict(state_dict, net, key.split('.'))
         net.load_state_dict(state_dict)
