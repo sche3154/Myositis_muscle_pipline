@@ -1,7 +1,5 @@
 import numpy as np
-
-from .patch_operations import *
-
+from patch_operations import *
 
 def instance_norm_2DSlices(image, mask=None):
         # (W,H,D)
@@ -93,3 +91,4 @@ def preprocessing(thigh_data):
     thigh_data_patches, thigh_coords = patch_generation(thigh_data_bounded
                                                         , kernel_size, stride_size, three_dim=True)
 
+    return thigh_data_patches, thigh_coords, bb 

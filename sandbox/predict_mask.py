@@ -7,6 +7,8 @@ import argparse
 
 from utils.data_io import *
 from utils.processing import *
+from utils.unet3D import *
+from utils.net_operations import *
 
 torch.manual_seed(1)
 np.random.seed(1)
@@ -15,7 +17,6 @@ torch.cuda.manual_seed_all(1)
 torch.cuda.manual_seed(1)
 torch.backends.cudnn.benchmark = True
 torch.backends.cudnn.deterministic = True
-
 
 if __name__ == '__main__':
     torch.cuda.empty_cache()
@@ -26,17 +27,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     thigh_data, affine = load_data(args.i, needs_affine=True)
+    thigh_data_patches, thigh_coords, bb = preprocessing(thigh_data)
 
-    
-    
-
-    dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
-    dataset_size = len(dataset)    # get the number of images in the dataset.
-    print('The number of testing images = %d' % dataset_size)
-
-    model = create_model(opt)      # create a model given opt.model and other options
-    model.setup(opt)               # regular setup: load and print networks; create schedulers
-    model.eval()
+    net =  init_net(U3DNet(1,1), gpu_ids=[0])
+    load_net(net, '/home/sheng/RA/Myositis_muscle_pipline/503_net_tms.pth')
+    net.eval()
 
     for i, data in enumerate(dataset):
 
