@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+venv.bak/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Operating System Files
+Thumbs.db
+desktop.ini
+
+# Compiled code
+*.class
+*.o
+*.so
+*.out
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Your Custom Ignored Files
+# Add any specific file paths or patterns you want Git to ignore
+.pth
