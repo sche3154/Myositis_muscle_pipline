@@ -112,8 +112,11 @@ You need to check three views respectively to make femur covered by white color 
 9. Now click 'run' and monitor the progress. You can modify the step size to change the growing speed. When monitoring the process, if you see the growing regions are not as expected, you shuold return to step 5.
 ![Run to seg](./imgs/step3/runbutton.png)
 You may also notice that some femur are not connected, we will fix that with manually annotation in the following step.
-10. You now need to check the axial view slice by slice and use the 'brush' tool to complete missing femur
-![Manual annotation](./imgs/step3/runbutton.png)
+10. You now need to check the axial view slice by slice and use the 'brush' tool to complete missing femur.
+
+Before manual annotation           |  After manual annotation
+:-------------------------:|:-------------------------:
+![](./imgs/step3/beforebrush.png)  |  ![](./imgs/step3/afterbrush.png)
 
 After finishing all steps above, you will got 4 femur masks, including 'bl_femur_left.nii.gz', 'bl_femur_right.nii.gz', 'fu3_femur_left.nii.gz', and 'fu3_femur_right.nii.gz'.
 
