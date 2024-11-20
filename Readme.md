@@ -174,7 +174,7 @@ We will take baseline together with followup left thigh data as an example, you 
 
 Inferior border of the gluteus maximus muscle          |  ROI1
 :-------------------------:|:-------------------------:
-![](./imgs/step5/before_roi1.png)  |  ![](./imgs/step2/roi1.png)
+![](./imgs/step5/before_roi1.png)  |  ![](./imgs/step5/roi1.png)
 
 
   Superior to the patella       |  ROI2
