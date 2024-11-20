@@ -88,30 +88,41 @@ Now we have generated 4 files, including bl_thigh_left.nii.gz, bl_thigh_right.ni
 
 You can use 'mrview' command or itksnap to take a look of the splitted thigh.
 
-## 3. femur segmentation
+## 3. Femur segmentation
 If you only need to deal with baseline images and without followup data, then you can skip this step. Otherwise, you need to apply following operations to both baseline and followup images.
 
 We will take a baseline image as an example, but don't forget followup ones later!
 
-1. Open the itksnap 
-2. Load the image
+1. Open the itksnap.
+
+2. Load the image.
 ![load the base](./imgs/step3/load_base.png)
+
 3. Use the 'snake' tool to bound the intrest area around the femur. You need to adjust the bounding box in three views respectively to make the bounding box to fit the femur as close as possible.
 ![snake](./imgs/step3/snake.png)
-4. Click 'Segment 3D' (indicates by the mouse cursor) on the left column
+
+4. Click 'Segment 3D' (indicates by the mouse cursor) on the left column.
 ![Segment 3D](./imgs/step3/seg3d.png)
+
 5. Modify the lower and upper threshold. Remember that the blue color indicates the background and white color indicates foreground. We want the femur (white) to be surrounded by blue color.
 ![Modify the threshold](./imgs/step3/threshold.png)
+
 You need to check three views respectively to make femur covered by white color and the surrounding areas of femur covered by blue color such that the algorithm will not connect unexpected areas.
-6. Click 'Next' (indicates by the mouse cursor)
+
+6. Click 'Next' (indicates by the mouse cursor).
 ![Threshold next](./imgs/step3/thresholdnext.png)
+
 7. Click 'Add bubble at cursor' and modify the bubble radius. The bubble at curosr should not exceed the femur.
 ![Add bubble](./imgs/step3/addbubble.png)
-8. Click 'Next' (indicates by the mouse cursor)
+
+8. Click 'Next' (indicates by the mouse cursor).
 ![Bubble next](./imgs/step3/addbubble_next.png)
+
 9. Now click 'run' and monitor the progress. You can modify the step size to change the growing speed. When monitoring the process, if you see the growing regions are not as expected, you shuold return to step 5.
 ![Run to seg](./imgs/step3/runbutton.png)
+
 You may also notice that some femur are not connected, we will fix that with manually annotation in the following step.
+
 10. You now need to check the axial view slice by slice and use the 'brush' tool to complete missing femur.
 
 Before manual annotation           |  After manual annotation
@@ -120,7 +131,7 @@ Before manual annotation           |  After manual annotation
 
 After finishing all steps above, you will got 4 femur masks, including 'bl_femur_left.nii.gz', 'bl_femur_right.nii.gz', 'fu3_femur_left.nii.gz', and 'fu3_femur_right.nii.gz'.
 
-## 4. registration
+## 4. Registration
 
 We now want to align the followup data with the baseline data. Thus, the registration tool 'flirt' will be used.
 The official documentation is provided as [flirt](https://web.mit.edu/fsl_v5.0.10/fsl/doc/wiki/FLIRT(2f)UserGuide.html).
@@ -164,16 +175,16 @@ bl_left          |  fu3_left_ref2bl
 ![bl_thigh_left](./imgs/step4/bl.png)  |  ![fu3_thigh_left_ref2bl](./imgs/step4/fu.png)
 
 
-## 5. crop ROIs
+## 5. Crop ROIs
 We need to crop ROIs for both baseline and followup data. According to the [paper](https://link.springer.com/chapter/10.1007/978-3-030-00807-9_2), the ROI is located between the axial slice immediately superior to the patella and the inferior border of the gluteus maximus muscle.
 
 We will take baseline together with followup left thigh data as an example, you should apply the same process to the right thigh later.
 
-1. Open the itksnap 
-2. Load the baseline image
-3. Check the axial view to inspect the ROI
+1. Open the itksnap.
+2. Load the baseline image.
+3. Check the axial view to inspect the ROI.
 4. Record the corresponding slice position of ROI in axial view.
-5. Run the following commands
+5. Run the following commands.
 
 Inferior border of the gluteus maximus muscle          |  ROI1
 :-------------------------:|:-------------------------:
