@@ -181,7 +181,7 @@ Superior to the patella       |  ROI2
 :-------------------------:|:-------------------------:
 ![](./imgs/step5/before_roi2.png)  |  ![](./imgs/step5/roi2.png)
 
-
+The bio markers are indicated by the blue cross.
 
 ```
 python3 $code_root/crop_roi.py \
@@ -214,6 +214,11 @@ N4BiasFieldCorrection \
 ```
 
 In this command, '-i' is input, and '-o' is the output.
+
+Before N4       |  After N4
+:-------------------------:|:-------------------------:
+![](./imgs/step6/beforen4.png)  |  ![](./imgs/step6/n4.png)
+
 
 ## 7. Mask Generation
 
