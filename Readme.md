@@ -177,7 +177,7 @@ Inferior border of the gluteus maximus muscle          |  ROI1
 ![](./imgs/step5/before_roi1.png)  |  ![](./imgs/step5/roi1.png)
 
 
-  Superior to the patella       |  ROI2
+Superior to the patella       |  ROI2
 :-------------------------:|:-------------------------:
 ![](./imgs/step5/before_roi2.png)  |  ![](./imgs/step5/roi2.png)
 
