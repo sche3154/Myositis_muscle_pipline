@@ -156,7 +156,7 @@ flirt -in $fu_root/raw/fu3_thigh_left.nii.gz \
 
 After registration, you have successfully aligned the followup and baseline data. You can now do further analysis.
 
-bl_thigh_left          |  fu3_thigh_left_ref2bl
+bl_left          |  fu3_left_ref2bl
 :-------------------------:|:-------------------------:
 ![bl_thigh_left](./imgs/step4/bl.png)  |  ![fu3_thigh_left_ref2bl](./imgs/step4/fu.png)
 
