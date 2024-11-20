@@ -172,9 +172,15 @@ We will take baseline together with followup left thigh data as an example, you 
 4. Record the corresponding slice position of ROI in axial view.
 5. Run the following commands
 
-bl_thigh_left/right            |  FU3_thigh_left/right
+Inferior border of the gluteus maximus muscle          |  ROI1
 :-------------------------:|:-------------------------:
-![bl_thigh.nii.gz](./imgs/step2/bl_splitted.png)  |  ![FU3_thigh.nii.gz](./imgs/step2/fu_splitted.png)
+![](./imgs/step5/before_roi1.png)  |  ![](./imgs/step2/roi1.png)
+
+
+  Superior to the patella       |  ROI2
+:-------------------------:|:-------------------------:
+![](./imgs/step5/before_roi2.png)  |  ![](./imgs/step5/roi2.png)
+
 
 
 ```
