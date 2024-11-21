@@ -223,8 +223,8 @@ We will take baseline left thigh roi as an example, you should apply the same pr
 
 ```
 N4BiasFieldCorrection \
--i /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi.nii.gz \
--o /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4.nii.gz
+-i $bl_root/raw/bl_thigh_left_roi.nii.gz \
+-o $bl_root/raw/bl_thigh_left_roi_N4.nii.gz
 ```
 
 In this command, '-i' is input, and '-o' is the output.
@@ -239,10 +239,12 @@ Before N4       |  After N4
 You can now use the trained model to generate thigh muscle masks. I will take the baseline left thigh data as an example.
 
 ```
-python3 /home/sheng/RA/Myositis_muscle_pipline/sandbox/predict_mask.py \
--i /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4.nii.gz \
--o /home/sheng/RA/data/muscle_longitudinal/BL/raw/bl_thigh_left_roi_N4_mask.nii.gz
+python3 $code_root/predict_mask3D.py \
+-i $bl_root/raw/bl_thigh_left_roi_N4.nii.gz \
+-o $bl_root/raw/bl_thigh_left_roi_N4_mask.nii.gz
 ```
+
+![Predicted mask](./imgs/step7/perdict.png)
 
 ## 8. Mask Refine.
 
@@ -252,7 +254,9 @@ This step is to refine the muscle mask by mannual inspection.
 2. Load the predict mask.
 3. Check the axial view slice by slice and use the 'brush' tool to complete missing thigh mask.
 
-
+Before N4       |  After N4
+:-------------------------:|:-------------------------:
+![](./imgs/step8/predict_mask.png)  |  ![](./imgs/step8/refined_mask.png)
 
 
 
