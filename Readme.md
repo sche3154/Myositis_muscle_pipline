@@ -244,7 +244,7 @@ python3 $code_root/predict_mask3D.py \
 -o $bl_root/raw/bl_thigh_left_roi_N4_mask.nii.gz
 ```
 
-![Predicted mask](./imgs/step7/perdict.png)
+![Predicted mask](./imgs/step7/predict.png)
 
 ## 8. Mask Refine.
 
