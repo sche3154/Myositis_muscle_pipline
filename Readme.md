@@ -254,7 +254,7 @@ This step is to refine the muscle mask by mannual inspection.
 2. Load the predict mask.
 3. Check the axial view slice by slice and use the 'brush' tool to complete missing thigh mask.
 
-Before N4       |  After N4
+Before refine       |  After refine
 :-------------------------:|:-------------------------:
 ![](./imgs/step8/predict_mask.png)  |  ![](./imgs/step8/refined_mask.png)
 
