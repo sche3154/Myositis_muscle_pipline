@@ -96,29 +96,37 @@ We will take a baseline image as an example, but don't forget followup ones late
 1. Open the itksnap.
 
 2. Load the image.
+
 ![load the base](./imgs/step3/load_base.png)
 
 3. Use the 'snake' tool to bound the intrest area around the femur. You need to adjust the bounding box in three views respectively to make the bounding box to fit the femur as close as possible.
+
 ![snake](./imgs/step3/snake.png)
 
 4. Click 'Segment 3D' (indicates by the mouse cursor) on the left column.
+
 ![Segment 3D](./imgs/step3/seg3d.png)
 
 5. Modify the lower and upper threshold. Remember that the blue color indicates the background and white color indicates foreground. We want the femur (white) to be surrounded by blue color.
+
 ![Modify the threshold](./imgs/step3/threshold.png)
 
 You need to check three views respectively to make femur covered by white color and the surrounding areas of femur covered by blue color such that the algorithm will not connect unexpected areas.
 
 6. Click 'Next' (indicates by the mouse cursor).
+
 ![Threshold next](./imgs/step3/thresholdnext.png)
 
 7. Click 'Add bubble at cursor' and modify the bubble radius. The bubble at curosr should not exceed the femur.
+
 ![Add bubble](./imgs/step3/addbubble.png)
 
 8. Click 'Next' (indicates by the mouse cursor).
+
 ![Bubble next](./imgs/step3/addbubble_next.png)
 
 9. Now click 'run' and monitor the progress. You can modify the step size to change the growing speed. When monitoring the process, if you see the growing regions are not as expected, you shuold return to step 5.
+
 ![Run to seg](./imgs/step3/runbutton.png)
 
 You may also notice that some femur are not connected, we will fix that with manually annotation in the following step.
