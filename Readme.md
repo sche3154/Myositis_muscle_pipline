@@ -60,7 +60,7 @@ We have now converted the raw baseline and followup data into the corresponding 
 
 bl_thigh            |  FU3_thigh
 :-------------------------:|:-------------------------:
-![bl_thigh.nii.gz](./imgs/step1/bl.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu3.png)
+![bl_thigh.nii.gz](./imgs/step1/bl_updated.png)  |  ![FU3_thigh.nii.gz](./imgs/step1/fu3_updated.png)
 
 
 ## 2. Split left and right thighs
