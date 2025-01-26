@@ -32,10 +32,25 @@ From the above, you can observe there are two main folders called 'BL' and 'FU',
 Before running specific operations, let's first setup the environment
 
 ```
+cd [path_of_the_project]
+code_root=[path_of_the_code_dir_after_git_clone]
+bl_root=[root_path_to_the_baseline_femur_data]
+fu_root=[root_path_to_the_followup_femur_data]
+```
+
+In my case, the setup code will be the following. You should adapt the above code to your own case. The cd command may not be necessary, as long as your provide the absolute path for your 'code_root', 'bl_root', 'fu_root', respectively. 
+
+```
 cd /home/sheng/RA/data/muscle_longitudinal
 code_root=/home/sheng/RA/Myositis_muscle_pipline
 bl_root=/home/sheng/RA/data/muscle_longitudinal/BL
 fu_root=/home/sheng/RA/data/muscle_longitudinal/FU
+```
+
+After that, we need to install required packages for running the code. 
+
+```
+pip install -r $code_root/requirements.txt
 ```
 
 Now, let's start following operations
@@ -43,10 +58,27 @@ Now, let's start following operations
 ## 2. Convert dicom to nii
 
 After getting the raw data, which usually ends in .dcm, you need to convert it into .nii.gz to make convenience for afterwards operations.
-An example is provided in [mrtrix3](https://mrtrix.readthedocs.io/en/dev/tips_and_tricks/dicom_handling.html)
+We use 'dcm2niix' for this step but we also provide an alternative method 'mrconvert' 
 
 ```
-mrconvert [input_dir_of_dcm_files] [output_path/converted.nii.gz]
+dcm2niix -o [output_path] -f [name_of_your_converted_file] -z y  [input_dir_of_dcm_files]
+```
+
+'-o' is the output_directory, if not provided, the 'dcm2niix' will write output NIfTI files to the current dcm directory
+'-f' is the file name tou want to use. Do not include .nii.gz to avoid duplication. THe dcm2nii will generate the .nii.gz for you.
+'-z y' is to generated a compressed .nii.gz. If not provided, the output will end with .nii
+
+For our example, 
+
+```
+dcm2niix -o $bl_root/raw/ -f bl_thigh -z y $bl_root/raw/Ax_T1
+dcm2niix -o $fu_root/raw/ -f fu3_thigh -z y $fu_root/raw/Ax_3D_T1_3
+```
+
+For the mrtrix, an example is provided in [mrtrix3](https://mrtrix.readthedocs.io/en/dev/tips_and_tricks/dicom_handling.html)
+
+```
+mrconvert [input_dir_of_dcm_files] [output_path/name_of_your_converted_file.nii.gz]
 ```
 
 For our example, please see the code below.
