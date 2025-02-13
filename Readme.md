@@ -279,7 +279,7 @@ Before N4       |  After N4
 You can now use the trained model to generate thigh muscle masks. I will take the baseline left thigh data as an example.
 
 ```
-python3 $code_root/predict_mask3D.py \
+python3 $code_root/predict_mask2D.py \
 -i $bl_root/raw/bl_thigh_left_roi_N4.nii.gz \
 -o $bl_root/raw/bl_thigh_left_roi_N4_mask.nii.gz
 ```
